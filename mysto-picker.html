@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+  <link rel='shortcut icon' type='image/x-icon' href='faviconit/favicon.ico'>
+  <title>MYSTO PICKER</title>
+  <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+  <style>
+    body {
+      background: url(mst3kbg.jpg);
+      background-size: 1450px;
+    }
+
+    h1 {
+      margin-right: 50px;
+      font-family: 'Abel', sans-serif;
+      font-size: 58px;
+      color: white;
+      text-align: right;
+    }
+
+    p {
+      margin-right: 50px;
+      margin-top: 50px;
+      font-family: 'Abel', sans-serif;
+      font-size: 26px;
+      color: white;
+      float: right;
+    }
+
+    button {
+      margin-right: 50px;
+      font-family: 'Abel', sans-serif;
+      font-size: 20px;
+      width: 150px;
+      height: 40px;
+      float: right;
+    }
+
+    div {
+      clear: both;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="centre">
+  <h1>MYSTO PICKER</h1>
+  <button id="butt">pick your poison</button>
+</div>
+<div>
+  <p><span id="pick"></span></p>
+</div>
+
+<script>
+var mst = ["warrior of the lost world", "space mutiny", "werewolf", "future war", "manos: the hands of fate", "timechasers", "bride of the monster", "the final sacrifice", "final justice", "pod people", "overdrawn at the memory bank", "mitchell", "merlin's shop of mystical wonders", "eegah!", "soultaker", "laserblast", "zombie nightmare", "pumaman", "gamera vs. guiron", "gamera vs. gaos", "jack frost", "i accuse my parents", "santa claus conquers the martians", "samson vs. the vampire women"]
+
+document.getElementById("butt").onclick = function(event) {
+  var picko = mst[Math.floor(Math.random() * mst.length)];
+
+  document.getElementById("pick").innerHTML = picko;
+}
+</script>
+</body>
+</html>
