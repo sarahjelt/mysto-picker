@@ -1,8 +1,10 @@
 var movie = [];
+var stream;
 
 window.onload = (function() {
-  for (let i = 0; i < mst3k.episodes.length; i++) {
-    var movieTitle = mst3k.episodes[i].movie;
+  for (let i = 0; i < mst3k.length; i++) {
+    var movieTitle = mst3k[i].movie;
+    var stream = mst3k[i].streaming;
     movie.push(movieTitle);
   }
   // console.log(movie);
@@ -10,14 +12,28 @@ window.onload = (function() {
 
 function dis() {
   var picko = movie[Math.floor(Math.random() * movie.length)];
+  var streamo;
+  function findObjectByKey(array, key, value) {
+    console.log(key, value);
+    for (var i = 0; i < array.length; i++) {
+      if (array[i][key] === value) {
+          // return array[i];
+          console.log(array[i]);
+          if (array[i].streaming) { streamo = array[i].streaming };
+      }
+    }
+    return null;
+  };
+
+  findObjectByKey(mst3k, "movie", picko);
 
   document.getElementById("pick").innerHTML = picko;
+  if (streamo) { document.getElementById("stream").innerHTML = "<img src='Netflix_icon.svg' />" };
 };
 
 // Many thanks to malantonio on Github for the JSON file of episodes for seasons K1/1–10!
 // https://github.com/malantonio/mst3k-episodes
-var mst3k = {
-  "episodes": [
+var mst3k = [
     { "id": "K00", "season": 0, "episode": 0, "movie": "The Green Slime", "shorts": [], "air_date": "unaired" },
     { "id": "K01", "season": 0, "epiosde": 1, "movie": "Invaders from the Deep", "shorts": [], "air_date": "1988-11-24" },
     { "id": "K02", "season": 0, "epiosde": 2, "movie": "Revenge of the Mysterons", "shorts": [], "air_date": "1988-11-24" },
@@ -30,19 +46,19 @@ var mst3k = {
     { "id": "K09", "season": 0, "episode": 9, "movie": "Phase IV", "shorts": [], "air_date": "1989-01-15" },
     { "id": "K10", "season": 0, "episode": 10, "movie": "Cosmic Princess", "shorts": [], "air_date": "1989-01-22" },
     { "id": "K11", "season": 0, "episode": 11, "movie": "Humanoid Woman", "shorts": [], "air_date": "1989-01-29" },
-    { "id": "K12", "season": 0, "episode": 12, "movie": "Fugitive Alien", "shorts": [], "air_date": "1989-02-05" },
+    { "id": "K12", "season": 0, "episode": 12, "movie": "Fugitive Alien (KTMA)", "shorts": [], "air_date": "1989-02-05" },
     { "id": "K13", "season": 0, "episode": 13, "movie": "SST Death Flight", "shorts": [], "air_date": "1989-02-19" },
     { "id": "K14", "season": 0, "episode": 14, "movie": "Mighty Jack", "shorts": [], "air_date": "1989-02-26" },
     { "id": "K15", "season": 0, "episode": 15, "movie": "Superdome", "shorts": [], "air_date": "1989-03-12" },
     { "id": "K16", "season": 0, "episode": 16, "movie": "City On Fire", "shorts": [], "air_date": "1989-03-19" },
-    { "id": "K17", "season": 0, "episode": 17, "movie": "Time of the Apes", "shorts": [], "air_date": "1989-04-02" },
+    { "id": "K17", "season": 0, "episode": 17, "movie": "Time of the Apes", "shorts": [], "air_date": "1989-04-02", "streaming": true },
     { "id": "K18", "season": 0, "episode": 18, "movie": "The Million Eyes of Su-Muru", "shorts": [], "air_date": "1989-05-07" },
     { "id": "K19", "season": 0, "episode": 19, "movie": "Hangar 18", "shorts": [], "air_date": "1989-05-14" },
     { "id": "K20", "season": 0, "episode": 20, "movie": "The Last Chase", "shorts": [], "air_date": "1989-05-21" },
     { "id": "K21", "season": 0, "episode": 21, "movie": "Legend of the Dinosaurs", "shorts": [], "air_date": "1989-05-28" },
 
     { "id": "S01E01", "season": 1, "episode": 1, "movie": "The Crawling Eye", "shorts": [], "air_date": "1989-11-25" },
-    { "id": "S01E02", "season": 1, "episode": 2, "movie": "The Robot vs. The Aztec Mummy", "shorts": ["Radar Men from the Moon, Chapter 1: 'Moon Rocket'"], "air_date": "1989-11-18" },
+    { "id": "S01E02", "season": 1, "episode": 2, "movie": "The Robot vs. The Aztec Mummy", "shorts": ["Radar Men from the Moon, Chapter 1: 'Moon Rocket'"], "air_date": "1989-11-18", "streaming": true },
     { "id": "S01E03", "season": 1, "episode": 3, "movie": "Mad Monster", "shorts": ["Radar Men from the Moon, Chapter 2: 'Molten Terror'"], "air_date": "1989-12-02" },
     { "id": "S01E04", "season": 1, "episode": 4, "movie": "Women of the Prehistoric Planet", "shorts": [], "air_date": "1990-02-10" },
     { "id": "S01E05", "season": 1, "episode": 5, "movie": "The Corpse Vanishes", "shorts": ["Radar Men from the Moon, Chapter 3: 'Bridge of Death'"], "air_date": "1989-12-09" },
@@ -58,14 +74,14 @@ var mst3k = {
     { "id": "S02E01", "season": 2, "episode": 1, "movie": "Rocketship X-M", "shorts": [], "air_date": "1990-09-22" },
     { "id": "S02E02", "season": 2, "episode": 2, "movie": "Sidehackers", "shorts": [], "air_date": "1990-09-29" },
     { "id": "S02E03", "season": 2, "episode": 3, "movie": "Jungle Goddess", "shorts": ["The Phantom Creeps, Chapter 1: 'The Menacing Power'"], "air_date": "1990-10-06" },
-    { "id": "S02E04", "season": 2, "episode": 4, "movie": "Catalina Caper", "shorts": [], "air_date": "1990-10-13" },
+    { "id": "S02E04", "season": 2, "episode": 4, "movie": "Catalina Caper", "shorts": [], "air_date": "1990-10-13", "streaming": true },
     { "id": "S02E05", "season": 2, "episode": 5, "movie": "Rocket Attack USA", "shorts": ["The Phantom Creeps, Chapter 2"], "air_date": "1990-10-27" },
     { "id": "S02E06", "season": 2, "episode": 6, "movie": "Ring of Terror", "shorts": ["The Phantom Creeps, Chapter 3"], "air_date": "1990-11-03" },
     { "id": "S02E07", "season": 2, "episode": 7, "movie": "Wild Rebels", "shorts": [], "air_date": "1990-11-17" },
     { "id": "S02E08", "season": 2, "episode": 8, "movie": "Lost Continent", "shorts": [], "air_date": "1990-11-24" },
     { "id": "S02E09", "season": 2, "episode": 9, "movie": "The Hellcats", "shorts": [], "air_date": "1990-12-08" },
     { "id": "S02E10", "season": 2, "episode": 10, "movie": "King Dinosaur", "shorts": ["X Marks the Spot"], "air_date": "1990-12-22" },
-    { "id": "S02E11", "season": 2, "episode": 11, "movie": "First Spaceship On Venus", "shorts": [], "air_date": "1990-12-29" },
+    { "id": "S02E11", "season": 2, "episode": 11, "movie": "First Spaceship On Venus", "shorts": [], "air_date": "1990-12-29", "streaming": true },
     { "id": "S02E12", "season": 2, "episode": 12, "movie": "Godzilla vs. Megalon", "shorts": [], "air_date": "1991-01-19" },
     { "id": "S02E13", "season": 2, "episode": 13, "movie": "Godzilla vs. The Sea Monster", "shorts": [], "air_date": "1991-02-02" },
 
@@ -78,7 +94,7 @@ var mst3k = {
     { "id": "S03E07", "season": 3, "episode": 7, "movie": "Daddy-O", "shorts": ["Alphabet Antics"], "air_date": "1991-07-20" },
     { "id": "S03E08", "season": 3, "episode": 8, "movie": "Gamera vs. Gaos", "shorts": [], "air_date": "1991-07-27" },
     { "id": "S03E09", "season": 3, "episode": 9, "movie": "The Amazing Colossal Man", "shorts": [], "air_date": "1991-08-03" },
-    { "id": "S03E10", "season": 3, "episode": 10, "movie": "Fugitive Alien", "shorts": [], "air_date": "1991-08-17" },
+    { "id": "S03E10", "season": 3, "episode": 10, "movie": "Fugitive Alien", "shorts": [], "air_date": "1991-08-17", "streaming": true },
     { "id": "S03E11", "season": 3, "episode": 11, "movie": "It Conquered the World", "shorts": ["The Sport Parade – Snow Thrills"], "air_date": "1991-08-24" },
     { "id": "S03E12", "season": 3, "episode": 12, "movie": "Gamera vs. Guiron", "shorts": [], "air_date": "1991-09-07" },
     { "id": "S03E13", "season": 3, "episode": 13, "movie": "Earth vs. The Spider", "shorts": ["Speech – Using Your Voice"], "air_date": "1991-09-14" },
@@ -96,14 +112,14 @@ var mst3k = {
 
     { "id": "S04E01", "season": 4, "episode": 1, "movie": "Space Travelers", "shorts": [], "air_date": "1992-06-06" },
     { "id": "S04E02", "season": 4, "episode": 2, "movie": "The Giant Gila Monster", "shorts": [], "air_date": "1992-06-13" },
-    { "id": "S04E03", "season": 4, "episode": 3, "movie": "City Limits", "shorts": [], "air_date": "1992-06-20" },
+    { "id": "S04E03", "season": 4, "episode": 3, "movie": "City Limits", "shorts": [], "air_date": "1992-06-20", "streaming": true },
     { "id": "S04E04", "season": 4, "episode": 4, "movie": "Teenagers From Outer Space", "shorts": [], "air_date": "1992-06-27" },
     { "id": "S04E05", "season": 4, "episode": 5, "movie": "Being From Another Planet", "shorts": [], "air_date": "1992-07-04" },
     { "id": "S04E06", "season": 4, "episode": 6, "movie": "Attack Of The Giant Leeches", "shorts": ["Undersea Kingdom: Episode 1"], "air_date": "1992-07-18" },
     { "id": "S04E07", "season": 4, "episode": 7, "movie": "The Killer Shrews", "shorts": ["Junior Rodeo Daredevils"], "air_date": "1992-07-25" },
     { "id": "S04E08", "season": 4, "episode": 8, "movie": "Hercules Unchained", "shorts": [], "air_date": "1992-08-01" },
     { "id": "S04E09", "season": 4, "episode": 9, "movie": "The Indestructible Man", "shorts": ["Undersea Kingdom: Episode 2"], "air_date": "1992-08-15" },
-    { "id": "S04E10", "season": 4, "episode": 10, "movie": "Hercules Against The Moon Men", "shorts": [], "air_date": "1992-08-22" },
+    { "id": "S04E10", "season": 4, "episode": 10, "movie": "Hercules Against The Moon Men", "shorts": [], "air_date": "1992-08-22", "streaming": true },
     { "id": "S04E11", "season": 4, "episode": 11, "movie": "The Magic Sword", "shorts": [], "air_date": "1992-08-29" },
     { "id": "S04E12", "season": 4, "episode": 12, "movie": "Hercules And The Captive Women", "shorts": [], "air_date": "1992-09-12" },
     { "id": "S04E13", "season": 4, "episode": 13, "movie": "Manhunt In Space", "shorts": ["General Hospital: Segment 1"], "air_date": "1992-09-19" },
@@ -117,17 +133,17 @@ var mst3k = {
     { "id": "S04E21", "season": 4, "episode": 21, "movie": "Monster A-Go-Go", "shorts": ["Circus On Ice"], "air_date": "1993-01-09" },
     { "id": "S04E22", "season": 4, "episode": 22, "movie": "The Day The Earth Froze", "shorts": ["Here Comes the Circus"], "air_date": "1993-01-16" },
     { "id": "S04E23", "season": 4, "episode": 23, "movie": "Bride of the Monster", "shorts": ["Hired!: Part 1"], "air_date": "1993-01-23" },
-    { "id": "S04E24", "season": 4, "episode": 24, "movie": "Manos the Hands of Fate", "shorts": ["Hired!: Part 2"], "air_date": "1993-01-30" },
+    { "id": "S04E24", "season": 4, "episode": 24, "movie": "Manos the Hands of Fate", "shorts": ["Hired!: Part 2"], "air_date": "1993-01-30", "streaming": true },
 
     { "id": "S05E01", "season": 5, "episode": 1, "movie": "Warrior of the Lost World", "shorts": [], "air_date": "1993-07-24" },
     { "id": "S05E02", "season": 5, "episode": 2, "movie": "Hercules", "shorts": [], "air_date": "1993-07-17" },
     { "id": "S05E03", "season": 5, "episode": 3, "movie": "Swamp Diamonds", "shorts": ["What to Do on a Date"], "air_date": "1993-07-31" },
     { "id": "S05E04", "season": 5, "episode": 4, "movie": "Secret Agent Super Dragon", "shorts": [], "air_date": "1993-08-07" },
     { "id": "S05E05", "season": 5, "episode": 5, "movie": "The Magic Voyage of Sinbad", "shorts": [], "air_date": "1993-08-14" },
-    { "id": "S05E06", "season": 5, "episode": 6, "movie": "Eegah!", "shorts": [], "air_date": "1993-08-28" },
+    { "id": "S05E06", "season": 5, "episode": 6, "movie": "Eegah!", "shorts": [], "air_date": "1993-08-28", "streaming": true },
     { "id": "S05E07", "season": 5, "episode": 7, "movie": "I Accuse My Parents", "shorts": ["The Truck Farmer"], "air_date": "1993-09-04" },
     { "id": "S05E08", "season": 5, "episode": 8, "movie": "Operation Double 007", "shorts": [], "air_date": "1993-09-11" },
-    { "id": "S05E09", "season": 5, "episode": 9, "movie": "The Girl In Lovers Lane", "shorts": [], "air_date": "1993-09-18" },
+    { "id": "S05E09", "season": 5, "episode": 9, "movie": "The Girl In Lovers Lane", "shorts": [], "air_date": "1993-09-18", "streaming": true },
     { "id": "S05E10", "season": 5, "episode": 10, "movie": "The Painted Hills", "shorts": ["Body Care and Grooming"], "air_date": "1993-09-26" },
     { "id": "S05E11", "season": 5, "episode": 11, "movie": "The Gunslinger", "shorts": [], "air_date": "1993-10-09" },
     { "id": "S05E12", "season": 5, "episode": 12, "movie": "Mitchell", "shorts": [], "air_date": "1993-10-23" },
@@ -135,7 +151,7 @@ var mst3k = {
     { "id": "S05E14", "season": 5, "episode": 14, "movie": "Teen-age Strangler", "shorts": ["Is This Love?"], "air_date": "1993-11-07" },
     { "id": "S05E15", "season": 5, "episode": 15, "movie": "The Wild World Of Batwoman", "shorts": ["Cheating"], "air_date": "1993-11-13" },
     { "id": "S05E16", "season": 5, "episode": 16, "movie": "Alien From LA", "shorts": [], "air_date": "1993-11-20" },
-    { "id": "S05E17", "season": 5, "episode": 17, "movie": "Beginning Of The End", "shorts": [], "air_date": "1993-11-25" },
+    { "id": "S05E17", "season": 5, "episode": 17, "movie": "Beginning Of The End", "shorts": [], "air_date": "1993-11-25", "streaming": true },
     { "id": "S05E18", "season": 5, "episode": 18, "movie": "The Atomic Brain", "shorts": ["What About Juvenile Delinquency"], "air_date": "1993-12-04" },
     { "id": "S05E19", "season": 5, "episode": 19, "movie": "Outlaw", "shorts": [], "air_date": "1993-12-11" },
     { "id": "S05E20", "season": 5, "episode": 20, "movie": "Radar Secret Service", "shorts": ["Last Clear Chance"], "air_date": "1993-12-18" },
@@ -159,7 +175,7 @@ var mst3k = {
     { "id": "S06E13", "season": 6, "episode": 13, "movie": "The Sinister Urge", "shorts": ["Keeping Clean and Neat"], "air_date": "1994-11-05" },
     { "id": "S06E14", "season": 6, "episode": 14, "movie": "San Francisco International", "shorts": [], "air_date": "1994-11-19" },
     { "id": "S06E15", "season": 6, "episode": 15, "movie": "Kitten With a Whip", "shorts": [], "air_date": "1994-11-23" },
-    { "id": "S06E16", "season": 6, "episode": 16, "movie": "Racket Girls", "shorts": ["Are You Ready for Marriage?"], "air_date": "1994-11-26" },
+    { "id": "S06E16", "season": 6, "episode": 16, "movie": "Racket Girls", "shorts": ["Are You Ready for Marriage?"], "air_date": "1994-11-26", "streaming": true },
     { "id": "S06E17", "season": 6, "episode": 17, "movie": "The Sword and the Dragon", "shorts": [], "air_date": "1994-12-03" },
     { "id": "S06E18", "season": 6, "episode": 18, "movie": "High School Big Shot", "shorts": ["Out of this World"], "air_date": "1994-12-10" },
     { "id": "S06E19", "season": 6, "episode": 19, "movie": "Red Zone Cuba", "shorts": ["Speech: Platform Posture and Appearance"], "air_date": "1994-12-17" },
@@ -188,14 +204,14 @@ var mst3k = {
     { "id": "S08E10", "season": 8, "episode": 10, "movie": "The Giant Spider Invasion", "shorts": [], "air_date": "1997-05-31" },
     { "id": "S08E11", "season": 8, "episode": 11, "movie": "Parts The Clonus Horror", "shorts": [], "air_date": "1997-06-07" },
     { "id": "S08E12", "season": 8, "episode": 12, "movie": "The Incredibly Strange Creatures Who Stopped Living and Became Mixed-Up Zombies", "shorts": [], "air_date": "1997-06-14" },
-    { "id": "S08E13", "season": 8, "episode": 13, "movie": "Jack Frost", "shorts": [], "air_date": "1997-07-12" },
+    { "id": "S08E13", "season": 8, "episode": 13, "movie": "Jack Frost", "shorts": [], "air_date": "1997-07-12", "streaming": true },
     { "id": "S08E14", "season": 8, "episode": 14, "movie": "Riding With Death", "shorts": [], "air_date": "1997-07-19" },
     { "id": "S08E15", "season": 8, "episode": 15, "movie": "Agent For H.A.R.M", "shorts": [], "air_date": "1997-08-02" },
     { "id": "S08E16", "season": 8, "episode": 16, "movie": "Prince Of Space", "shorts": [], "air_date": "1997-08-16" },
     { "id": "S08E17", "season": 8, "episode": 17, "movie": "Horror of Party Beach", "shorts": [], "air_date": "1997-09-06" },
     { "id": "S08E18", "season": 8, "episode": 18, "movie": "Devil Doll", "shorts": [], "air_date": "1997-10-04" },
     { "id": "S08E19", "season": 8, "episode": 19, "movie": "Invasion of the Neptune Men", "shorts": [], "air_date": "1997-10-11" },
-    { "id": "S08E20", "season": 8, "episode": 20, "movie": "Space Mutiny", "shorts": [], "air_date": "1997-11-07" },
+    { "id": "S08E20", "season": 8, "episode": 20, "movie": "Space Mutiny", "shorts": [], "air_date": "1997-11-07", "streaming": true },
     { "id": "S08E21", "season": 8, "episode": 21, "movie": "Time Chasers", "shorts": [], "air_date": "1997-11-22" },
     { "id": "S08E22", "season": 8, "episode": 22, "movie": "Overdrawn At the Memory Bank", "shorts": [], "air_date": "1997-12-06" },
 
@@ -206,25 +222,44 @@ var mst3k = {
     { "id": "S09E05", "season": 9, "episode": 5, "movie": "The Deadly Bees", "shorts": [], "air_date": "1998-05-09" },
     { "id": "S09E06", "season": 9, "episode": 6, "movie": "The Space Children", "shorts": ["Century 21 Calling"], "air_date": "1998-06-13" },
     { "id": "S09E07", "season": 9, "episode": 7, "movie": "Hobgoblins", "shorts": [] , "air_date": "1998-06-27"},
-    { "id": "S09E08", "season": 9, "episode": 8, "movie": "The Touch Of Satan", "shorts": [], "air_date": "1998-07-11" },
-    { "id": "S09E09", "season": 9, "episode": 9, "movie": "Gorgo", "shorts": [], "air_date": "1998-07-18" },
+    { "id": "S09E08", "season": 9, "episode": 8, "movie": "The Touch Of Satan", "shorts": [], "air_date": "1998-07-11", "streaming": true },
+    { "id": "S09E09", "season": 9, "episode": 9, "movie": "Gorgo", "shorts": [], "air_date": "1998-07-18", "streaming": true },
     { "id": "S09E10", "season": 9, "episode": 10, "movie": "The Final Sacrifice", "shorts": [], "air_date": "1998-07-25" },
-    { "id": "S09E11", "season": 9, "episode": 11, "movie": "Devil Fish", "shorts": [], "air_date": "1998-08-15" },
+    { "id": "S09E11", "season": 9, "episode": 11, "movie": "Devil Fish", "shorts": [], "air_date": "1998-08-15", "streaming": true },
     { "id": "S09E12", "season": 9, "episode": 12, "movie": "The Screaming Skull", "shorts": ["Robot Rumpus"], "air_date": "1998-08-29" },
     { "id": "S09E13", "season": 9, "episode": 13, "movie": "Quest Of The Delta Knights", "shorts": [], "air_date": "1998-09-26" },
 
     { "id": "S10E01", "season": 10, "episode": 1, "movie": "Soultaker", "shorts": [], "air_date": "1999-04-11" },
-    { "id": "S10E02", "season": 10, "episode": 2, "movie": "Girl in Gold Boots", "shorts": [], "air_date": "1999-04-18" },
+    { "id": "S10E02", "season": 10, "episode": 2, "movie": "Girl in Gold Boots", "shorts": [], "air_date": "1999-04-18", "streaming": true },
     { "id": "S10E03", "season": 10, "episode": 3, "movie": "Merlin's Shop Of Mystical Wonders", "shorts": [], "air_date": "1999-09-12" },
-    { "id": "S10E04", "season": 10, "episode": 4, "movie": "Future War", "shorts": [], "air_date": "1999-04-25" },
+    { "id": "S10E04", "season": 10, "episode": 4, "movie": "Future War", "shorts": [], "air_date": "1999-04-25", "streaming": true },
     { "id": "S10E05", "season": 10, "episode": 5, "movie": "Blood Waters of Dr. Z", "shorts": [], "air_date": "1999-05-02" },
     { "id": "S10E06", "season": 10, "episode": 6, "movie": "Boggy Creek II: and The Legend Continues", "shorts": [], "air_date": "1999-05-09" },
     { "id": "S10E07", "season": 10, "episode": 7, "movie": "Track Of The Moon Beast", "shorts": [], "air_date": "1999-06-13" },
     { "id": "S10E08", "season": 10, "episode": 8, "movie": "Final Justice", "shorts": [], "air_date": "1999-06-20" },
     { "id": "S10E09", "season": 10, "episode": 9, "movie": "Hamlet", "shorts": [], "air_date": "1999-06-27" },
     { "id": "S10E10", "season": 10, "episode": 10, "movie": "It Lives By Night", "shorts": [], "air_date": "1999-07-18" },
-    { "id": "S10E11", "season": 10, "episode": 11, "movie": "The Horrors of Spider Island", "shorts": [], "air_date": "1999-07-25" },
+    { "id": "S10E11", "season": 10, "episode": 11, "movie": "The Horrors of Spider Island", "shorts": [], "air_date": "1999-07-25", "streaming": true },
     { "id": "S10E12", "season": 10, "episode": 12, "movie": "Squirm", "shorts": ["A Case of Spring Fever"], "air_date": "1999-08-01" },
-    { "id": "S10E13", "season": 10, "episode": 13, "movie": "Diabolik", "shorts": [], "air_date": "1999-08-08" }
-  ]
-};
+    { "id": "S10E13", "season": 10, "episode": 13, "movie": "Diabolik", "shorts": [], "air_date": "1999-08-08" },
+    { "id": "S11E01", "season": 11, "episode": 1, "movie": "Reptilicus", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S11E02", "season": 11, "episode": 2, "movie": "Cry Wilderness", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S11E03", "season": 11, "episode": 3, "movie": "The Time Travelers", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S11E04", "season": 11, "episode": 4, "movie": "Avalanche", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S11E05", "season": 11, "episode": 5, "movie": "The Beast of Hollow Mountain", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S11E06", "season": 11, "episode": 6, "movie": "Starcrash", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S11E07", "season": 11, "episode": 7, "movie": "The Land That Time Forgot", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S11E08", "season": 11, "episode": 8, "movie": "The Loves of Hercules", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S11E09", "season": 11, "episode": 9, "movie": "Yongary, Monster of the Deep", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S11E10", "season": 11, "episode": 10, "movie": "Wizards of the Lost Kingdom", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S11E11", "season": 11, "episode": 11, "movie": "Wizards of the Lost Kingdom II", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S11E12", "season": 11, "episode": 12, "movie": "Carnival Magic", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S11E13", "season": 11, "episode": 13, "movie": "The Christmas That Almost Wasn't", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S11E14", "season": 11, "episode": 14, "movie": "At the Earth's Core", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S12E01", "season": 12, "episode": 1, "movie": "Mac and Me", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S12E02", "season": 12, "episode": 2, "movie": "Atlantic Rim", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S12E03", "season": 12, "episode": 3, "movie": "Lords of the Deep", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S12E04", "season": 12, "episode": 4, "movie": "The Day Time Ended", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S12E05", "season": 12, "episode": 5, "movie": "Killer Fish", "shorts": [], "air_date": "", "streaming": true },
+    { "id": "S12E06", "season": 12, "episode": 6, "movie": "Ator, the Fighting Eagle", "shorts": [], "air_date": "", "streaming": true }
+  ];
