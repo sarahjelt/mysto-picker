@@ -11,6 +11,7 @@ window.onload = (function() {
 });
 
 function dis() {
+  document.getElementById("stream").innerHTML = ""
   var picko = movie[Math.floor(Math.random() * movie.length)];
   var streamo;
   function findObjectByKey(array, key, value) {
